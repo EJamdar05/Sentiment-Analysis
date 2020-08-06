@@ -1,11 +1,11 @@
+//requirments and other boiler plate code
 const dotenv = require('dotenv');
 dotenv.config();
 const apiKey = process.env.LICENSE_KEY;
-
+var axios = require('axios')
 var path = require('path')
 const express = require('express')
 const mockAPIResponse = require('./mockAPI.js')
-
 const fetch = require('node-fetch');
 const bodyParser = require('body-parser');
 const cors = require("cors");
@@ -34,11 +34,14 @@ app.listen(8081, function () {
     res.send(mockAPIResponse)
 })*/
 
+//when the user sumbits a string, this function is 
+//called and will contact the api to obtain the info
+//and if successful, send the data over
 app.post('/urlData', async(req,res)=>{
-  const userLink = req.body.formText;
-  let apiResp = await fetch(`https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&txt=${userLink}&model=general`)
+  const userLink = req.query.text;
+  axios.post(`https://api.meaningcloud.com/sentiment-2.1?key=${apiKey}&lang=en&txt=${userLink}`)
   .then(resp=>{
-    return resp.json();
+    res.send(resp.data);
   })
   .catch(error=>{
     console.log(`Error: ${error}`)
