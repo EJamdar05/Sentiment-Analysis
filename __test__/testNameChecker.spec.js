@@ -1,6 +1,6 @@
-import { handleSubmit } from "../src/client/js/formHandler"
-describe("Testing the submit functionality", () => {
+import { checkForName } from "../src/client/js/nameChecker"
+describe("Testing the string check functionality", () => {
 
-    test("Testing the handleSubmit() function", () => {
-           expect(handleSubmit).toBeDefined();
+    test("Testing the checkForName() function", () => {
+           expect(checkForName).toBeDefined();
 })});
