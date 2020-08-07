@@ -3,13 +3,19 @@ function handleSubmit(event) {
 
     // check what text was put into the form field
     let formText = document.getElementById('name').value;
-    //Client.checkForName(formText)
-    let data={text:formText}
-    console.log("::: Form Submitted :::")
-    //postData function takes in the server call for data
-    //from the API
-    postData("http://localhost:8081/urlData",data)
-    handleSubmit();
+    let isString = Client.checkForName(formText);
+    if (isString == false){
+        errorMessage();
+    }
+    else{
+        //Client.checkForName(formText)
+        let data={text:formText}
+        console.log("::: Form Submitted :::")
+        //postData function takes in the server call for data
+        //from the API
+        postData("http://localhost:8081/urlData",data)
+        handleSubmit();
+    }
 }
 const postData = async(url='', data={})=>{
     //basic JSON boiler plate code 
@@ -49,4 +55,9 @@ const postData = async(url='', data={})=>{
     }
     
 };
+
+function errorMessage(){
+    document.getElementById('results').innerHTML = `<h2 style = "color: red; font-weight: bold;">ERROR: PLEASE ENTER A SENTENCE WITH NO NUMERICAL NUMBERS
+    OR SPECIAL CHARS.`
+}
 export { handleSubmit } 

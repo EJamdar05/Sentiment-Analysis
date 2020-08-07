@@ -1,15 +1,12 @@
 function checkForName(inputText) {
     console.log("::: Running checkForName :::", inputText);
-    let names = [
-        "Picard",
-        "Janeway",
-        "Kirk",
-        "Archer",
-        "Georgiou"
-    ]
-
-    if(names.includes(inputText)) {
-        alert("Welcome, Captain!")
+    if (!/^[a-zA-Z]+$/.test(inputText)){
+        console.log("User input not good");
+        return false;
+    }
+    else{
+        console.log("User input is fine");
+        return true;
     }
 }
 
